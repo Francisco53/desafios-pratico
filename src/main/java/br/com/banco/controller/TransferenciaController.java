@@ -5,10 +5,15 @@ import br.com.banco.entities.Transferencia;
 import br.com.banco.services.ContaService;
 import br.com.banco.services.TransferenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,9 +29,16 @@ public class TransferenciaController {
         this.transferenciaService = service;
     }
 
+
+
     @GetMapping
-    public ResponseEntity<List<Transferencia>> listarTransferencias() {
-        List<Transferencia> transferencias = transferenciaService.listarTransferencias();
+    public ResponseEntity<List<Transferencia>> obterTransferencias(
+            @RequestParam(value = "nomeOperadorTransacao", required = false) String nomeOperadorTransacao,
+            @RequestParam(value = "dataInicial", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dataInicial,
+            @RequestParam(value = "dataFinal", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dataFinal) {
+
+        List<Transferencia> transferencias = transferenciaService.obterTransferencias(nomeOperadorTransacao, dataInicial, dataFinal);
+
         return ResponseEntity.ok(transferencias);
     }
 

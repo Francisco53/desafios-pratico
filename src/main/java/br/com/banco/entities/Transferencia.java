@@ -2,6 +2,7 @@ package br.com.banco.entities;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.time.LocalDate;
 
 @Entity
 public class Transferencia {
@@ -9,7 +10,7 @@ public class Transferencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Instant dataTransferencia;
+    private LocalDate dataTransferencia;
     private double valor;
     private String tipo;
     private String nomeOperadorTransacao;
@@ -23,7 +24,7 @@ public class Transferencia {
 
     }
 
-    public Transferencia(Long id, Instant dataTransferencia, double valor, String tipo, String nomeOperadorTransacao, Conta conta) {
+    public Transferencia(Long id, LocalDate dataTransferencia, double valor, String tipo, String nomeOperadorTransacao, Conta conta) {
         this.id = id;
         this.dataTransferencia = dataTransferencia;
         this.valor = valor;
@@ -40,11 +41,11 @@ public class Transferencia {
         this.id = id;
     }
 
-    public Instant getDataTransferencia() {
+    public LocalDate getDataTransferencia() {
         return dataTransferencia;
     }
 
-    public void setDataTransferencia(Instant dataTransferencia) {
+    public void setDataTransferencia(LocalDate dataTransferencia) {
         this.dataTransferencia = dataTransferencia;
     }
 
